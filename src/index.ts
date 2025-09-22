@@ -119,6 +119,7 @@ class GitHubMCPServer {
 
       // Connect to transport
       const transport = new StdioServerTransport();
+      // @ts-ignore - TypeScript has issues with the MCP SDK types
       await this.server.connect(transport);
       
       this.isConnected = true;

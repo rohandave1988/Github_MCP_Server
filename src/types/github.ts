@@ -130,16 +130,3 @@ export interface GitHubSearchResult {
   }>;
 }
 
-export interface RateLimitInfo {
-  limit: number;
-  remaining: number;
-  reset: Date;
-  used: number;
-}
-
-export interface GitHubApiResponse<T> {
-  data: T;
-  status: number;
-  headers: Record<string, string>;
-  rateLimit?: RateLimitInfo;
-}

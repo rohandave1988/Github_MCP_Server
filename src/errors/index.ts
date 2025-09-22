@@ -19,18 +19,8 @@ export class ValidationError extends AppError {
 }
 
 export class GitHubAPIError extends AppError {
-  public readonly rateLimitRemaining?: number;
-  public readonly rateLimitReset?: Date;
-
-  constructor(
-    message: string,
-    statusCode: number,
-    rateLimitRemaining?: number,
-    rateLimitReset?: number
-  ) {
+  constructor(message: string, statusCode: number) {
     super(message, statusCode);
-    this.rateLimitRemaining = rateLimitRemaining;
-    this.rateLimitReset = rateLimitReset ? new Date(rateLimitReset * 1000) : undefined;
   }
 }
 

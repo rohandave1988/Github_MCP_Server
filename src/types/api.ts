@@ -25,8 +25,77 @@ export const GeneratePRFeedbackSchema = z.object({
     .optional(),
 });
 
+// New schemas for additional functionality
+export const GetPullRequestDiffSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  pr_number: z.number().int().positive('PR number must be a positive integer'),
+});
+
+export const GetPullRequestFilesSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  pr_number: z.number().int().positive('PR number must be a positive integer'),
+});
+
+export const GetPullRequestStatusSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  pr_number: z.number().int().positive('PR number must be a positive integer'),
+});
+
+export const ListPullRequestsSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  state: z.enum(['open', 'closed', 'all']).default('open'),
+  limit: z.number().int().positive().max(100).default(30),
+  page: z.number().int().positive().default(1),
+});
+
+export const GetCommitSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  commit_sha: z.string().min(1, 'Commit SHA is required'),
+});
+
+export const GetFileContentsSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  file_path: z.string().min(1, 'File path is required'),
+  ref: z.string().optional(),
+});
+
+export const ListCommitsSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  branch: z.string().optional(),
+  author: z.string().optional(),
+  since: z.string().optional(),
+  until: z.string().optional(),
+  limit: z.number().int().positive().max(100).default(30),
+  page: z.number().int().positive().default(1),
+});
+
+export const SearchCodeSchema = z.object({
+  repo_url: z.string().url('Invalid repository URL'),
+  query: z.string().min(1, 'Search query is required'),
+  file_extensions: z.array(z.string()).optional(),
+  limit: z.number().int().positive().max(100).default(30),
+});
+
+export const SearchRepositoriesSchema = z.object({
+  query: z.string().min(1, 'Search query is required'),
+  sort: z.enum(['stars', 'forks', 'help-wanted-issues', 'updated']).optional(),
+  order: z.enum(['asc', 'desc']).default('desc'),
+  limit: z.number().int().positive().max(100).default(30),
+  page: z.number().int().positive().default(1),
+});
+
+// Type definitions for the new schemas
 export type FetchPRDetailsInput = z.infer<typeof FetchPRDetailsSchema>;
 export type GeneratePRFeedbackInput = z.infer<typeof GeneratePRFeedbackSchema>;
+export type GetPullRequestDiffInput = z.infer<typeof GetPullRequestDiffSchema>;
+export type GetPullRequestFilesInput = z.infer<typeof GetPullRequestFilesSchema>;
+export type GetPullRequestStatusInput = z.infer<typeof GetPullRequestStatusSchema>;
+export type ListPullRequestsInput = z.infer<typeof ListPullRequestsSchema>;
+export type GetCommitInput = z.infer<typeof GetCommitSchema>;
+export type GetFileContentsInput = z.infer<typeof GetFileContentsSchema>;
+export type ListCommitsInput = z.infer<typeof ListCommitsSchema>;
+export type SearchCodeInput = z.infer<typeof SearchCodeSchema>;
+export type SearchRepositoriesInput = z.infer<typeof SearchRepositoriesSchema>;
 
 export interface PRAnalysis {
   title: string;
