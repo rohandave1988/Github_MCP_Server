@@ -14,13 +14,14 @@ A comprehensive Model Context Protocol (MCP) server that provides extensive GitH
 ## Prerequisites
 
 - Node.js 18+
+- Yarn package manager
 - GitHub Personal Access Token
 
 ## Setup
 
 1. **Install dependencies**:
    ```bash
-   npm install
+   yarn install
    ```
 
 2. **Set environment variables**:
@@ -30,12 +31,12 @@ A comprehensive Model Context Protocol (MCP) server that provides extensive GitH
 
 3. **Build the project**:
    ```bash
-   npm run build
+   yarn build
    ```
 
 4. **Run the server**:
    ```bash
-   npm start
+   yarn start
    ```
 
 ## Quick Reference - All Available Actions
@@ -484,23 +485,20 @@ The server implements intelligent rate limiting and retry mechanisms:
 ## Development
 
 ```bash
-# Development mode with hot reload
-npm run dev
-
 # Type checking
-npm run typecheck
-
-# Linting (fix ESLint config first)
-npm run lint:fix
-
-# Run tests
-npm test
+yarn typecheck
 
 # Build for production
-npm run build
+yarn build
+
+# Start server
+yarn start
 
 # Health check
-npm run health
+yarn health
+
+# Clean build directory
+yarn clean
 ```
 
 ### Project Structure
